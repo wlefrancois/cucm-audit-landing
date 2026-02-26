@@ -1,50 +1,297 @@
-<script>
-(function () {
-  var fired = false;
-
-  function fire() {
-    if (fired) return;
-    fired = true;
-    if (typeof plausible === "function") {
-      plausible("Waitlist Signup");
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carnivore Command Center — Elite Performance Intelligence</title>
+  <meta name="description" content="Elite performance intelligence for modern families. Track what matters, see patterns, and optimize metabolic health with confidence." />
+  <link rel="icon" href="/assets/favicons/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/assets/favicons/apple-touch-icon.png" />
+  <link rel="manifest" href="/assets/favicons/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ccc-blue:#23B2FF;
+      --ccc-black:#0B0F14;
+      --ccc-graphite:#1C232B;
+      --ccc-gray:#AEB6BF;
+      --ccc-light:#F5F7FA;
+      --ccc-red:#FF3B30;
+      --radius:18px;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --border: 1px solid rgba(255,255,255,.10);
     }
-  }
-
-  // Watch for DOM changes (Kit is dynamic)
-  var obs = new MutationObserver(function () {
-    // 1) If the form is replaced by a success message area
-    var successByText = document.body && document.body.innerText && (
-      document.body.innerText.includes("Success!") ||
-      document.body.innerText.includes("confirm your subscription") ||
-      document.body.innerText.includes("You're subscribed") ||
-      document.body.innerText.includes("Thanks for") ||
-      document.body.innerText.includes("Thank you")
-    );
-
-    // 2) If Kit adds a success alert element
-    var successAlert = document.querySelector(".formkit-alert-success");
-
-    // 3) If the submit button has finished and the form shows success UI
-    // (Kit often toggles attributes/classes)
-    var formHasSuccessState = document.querySelector('[data-element="success"], [data-group="success"]');
-
-    if (successByText || successAlert || formHasSuccessState) {
-      fire();
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(900px 500px at 20% 10%, rgba(35,178,255,.16), transparent 60%),
+                  radial-gradient(900px 500px at 80% 0%, rgba(255,59,48,.06), transparent 55%),
+                  linear-gradient(180deg, #05070a 0%, var(--ccc-black) 40%, #070a10 100%);
+      color: var(--ccc-light);
+      line-height:1.5;
     }
-  });
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:0 22px}
+    .nav{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(5,7,10,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .brand img{height:34px;width:auto;display:block}
+    .brand .wordmark{font-family: Montserrat, Inter, sans-serif;font-weight:700;letter-spacing:.2px}
+    .nav-links{display:flex;gap:18px;align-items:center}
+    .nav-links a{opacity:.82;text-decoration:none;font-size:14px}
+    .nav-links a:hover{opacity:1}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;border:var(--border);background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));text-decoration:none;font-weight:600}
+    .btn-primary{border:1px solid rgba(35,178,255,.35);background:linear-gradient(180deg, rgba(35,178,255,.25), rgba(35,178,255,.10));box-shadow:0 18px 50px rgba(35,178,255,.10);}
+    .btn-primary:hover{filter:brightness(1.06)}
+    .btn-ghost:hover{background: rgba(255,255,255,.06)}
+    .hero{padding:64px 0 26px}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;border:1px solid rgba(35,178,255,.22);background:rgba(35,178,255,.08);font-size:13px}
+    h1{font-family: Montserrat, Inter, sans-serif;font-weight:700;letter-spacing:-.6px;line-height:1.05;font-size:clamp(34px, 4.4vw, 54px);margin:14px 0 12px;}
+    .sub{font-size:clamp(16px, 1.7vw, 19px);color: rgba(174,182,191,.95);max-width:54ch}
+    .cta-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:22px}
+    .dot{width:8px;height:8px;border-radius:999px;background: rgba(35,178,255,.85);box-shadow:0 0 20px rgba(35,178,255,.45)}
+    .trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;color: rgba(174,182,191,.9);font-size:13px}
+    .trust span{display:inline-flex;gap:8px;align-items:center}
+    .panel{border-radius:var(--radius);background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));border:var(--border);box-shadow:var(--shadow);padding:18px;position:relative;overflow:hidden}
+    .panel::before{content:"";position:absolute;inset:-2px;background:radial-gradient(500px 200px at 15% 10%, rgba(35,178,255,.18), transparent 60%);pointer-events:none}
+    .mock-title{display:flex;justify-content:space-between;align-items:center;position:relative}
+    .mock-title b{font-size:14px}
+    .pill{font-size:12px;background: rgba(35,178,255,.12);border:1px solid rgba(35,178,255,.18);padding:6px 10px;border-radius:999px}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px;position:relative}
+    .card{border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.25);padding:12px}
+    .k{font-size:12px;color: rgba(174,182,191,.9)}
+    .v{font-size:18px;font-weight:700;margin-top:4px}
+    section{padding:56px 0}
+    .section-title{font-family: Montserrat, Inter, sans-serif;font-size:28px;margin:0 0 10px}
+    .section-sub{color: rgba(174,182,191,.95);max-width:72ch;margin:0 0 22px}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .feature h3{margin:0 0 6px;font-size:16px}
+    .feature p{margin:0;color: rgba(174,182,191,.95);font-size:14px}
+    .mini{margin-top:10px;font-size:12px;color: rgba(174,182,191,.85)}
+    .profiles{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .profile{padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background: rgba(255,255,255,.05);font-size:13px}
+    .profile.active{border-color: rgba(35,178,255,.35);background: rgba(35,178,255,.10)}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .step b{display:block;margin-bottom:6px}
+    .step p{margin:0;color: rgba(174,182,191,.95);font-size:14px}
+    .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    details{border:var(--border);background:rgba(255,255,255,.04);border-radius:14px;padding:14px}
+    details summary{cursor:pointer;font-weight:600}
+    details p{margin:10px 0 0;color: rgba(174,182,191,.95)}
+    .cta{border-radius:calc(var(--radius) + 6px);padding:28px;background:linear-gradient(180deg, rgba(35,178,255,.14), rgba(255,255,255,.04));border:1px solid rgba(35,178,255,.22);box-shadow:0 18px 60px rgba(35,178,255,.08);}
+    footer{padding:34px 0 60px;color: rgba(174,182,191,.8);font-size:13px}
+    footer a{opacity:.9}
+    /* Kit form overrides */
+    .kit-embed .formkit-container{background: transparent !important; box-shadow:none !important; padding:0 !important;}
+    .kit-embed .formkit-hero{display:none !important;}
+    .kit-embed .formkit-powered-by-convertkit-container{display:none !important;}
+    .kit-embed .formkit-fields{gap:10px !important;}
+    .kit-embed .formkit-input{width:100% !important;background: rgba(0,0,0,.35) !important;border: 1px solid rgba(255,255,255,.14) !important;color: var(--ccc-light) !important;border-radius: 12px !important;padding: 14px 14px !important;}
+    .kit-embed .formkit-input::placeholder{color: rgba(174,182,191,.85) !important;}
+    .kit-embed .formkit-submit{width:100% !important;border-radius:12px !important;border: 1px solid rgba(35,178,255,.35) !important;background: linear-gradient(180deg, rgba(35,178,255,.28), rgba(35,178,255,.12)) !important;color: var(--ccc-light) !important;font-weight:700 !important;padding:0 !important;}
+    .kit-embed .formkit-submit > span{padding: 14px 16px !important;}
+    .kit-embed .formkit-powered-by-convertkit-container{display:none !important;}
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .feature-grid{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr}
+      .timeline{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Carnivore Command Center">
+          <img src="/assets/logos/ccc-icon.svg" alt="CCC" onerror="this.style.display='none'">
+          <div class="wordmark">Carnivore Command Center</div>
+        </a>
+        <div class="nav-links">
+          <a href="#what">What it is</a>
+          <a href="#family">Family Mode</a>
+          <a href="#how">How it works</a>
+          <a href="#roadmap">Roadmap</a>
+          <a class="btn btn-primary" href="#join">Join Early Access</a>
+        </div>
+        <a class="btn btn-primary" href="#join">Join Early Access</a>
+      </div>
+    </div>
+  </div>
 
-  obs.observe(document.documentElement, { childList: true, subtree: true });
+  <main id="top">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="badge"><span class="dot"></span> Early Access • Building Now</div>
+            <h1>Elite performance intelligence for modern families.</h1>
+            <p class="sub">Track what matters, see patterns, and optimize metabolic health with confidence — across your entire household.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#join">Join Early Access</a>
+              <a class="btn btn-ghost" href="#how">See how it works</a>
+            </div>
+            <div class="trust">
+              <span><span class="dot" style="background:rgba(255,255,255,.55);box-shadow:none"></span> Privacy-first</span>
+              <span><span class="dot"></span> Built for families</span>
+              <span><span class="dot" style="background:rgba(255,59,48,.65)"></span> Data-driven</span>
+            </div>
+          </div>
 
-  // Also try to catch the actual submit event (works in some embeds)
-  document.addEventListener("submit", function (e) {
-    try {
-      var form = e.target;
-      if (form && form.classList && form.classList.contains("formkit-form")) {
-        // Don't fire here immediately; wait for success UI to appear
-        // (keeps false positives low)
-        setTimeout(function(){ /* observer will catch success */ }, 300);
-      }
-    } catch (err) {}
-  }, true);
-})();
-</script>
+          <div class="panel" aria-label="CCC dashboard preview">
+            <div class="mock-title">
+              <b>Weekly Intelligence</b>
+              <span class="pill">Household View</span>
+            </div>
+            <div class="grid">
+              <div class="card"><div class="k">Nutrition adherence</div><div class="v">92% ↑</div><div class="mini">7-day trend</div></div>
+              <div class="card"><div class="k">Sleep quality</div><div class="v">7.6h</div><div class="mini">avg / night</div></div>
+              <div class="card"><div class="k">Electrolytes</div><div class="v">On track</div><div class="mini">hydration balance</div></div>
+              <div class="card"><div class="k">Energy</div><div class="v">High</div><div class="mini">symptom stable</div></div>
+            </div>
+            <div class="card" style="margin-top:12px">
+              <div class="k">Insight</div>
+              <div style="margin-top:6px;color:rgba(245,247,250,.92);font-size:14px">
+                Caffeine after 1pm correlates with lower sleep quality across the household.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="what">
+        <h2 class="section-title">Stop guessing. Start measuring.</h2>
+        <p class="section-sub">CCC organizes daily inputs into a clear intelligence system so you can see cause and effect — especially across a family environment.</p>
+        <div class="two">
+          <div class="panel"><h3 style="margin:0 0 8px">The problem</h3><p style="margin:0;color:rgba(174,182,191,.95)">Health decisions feel random when you can’t connect inputs to outcomes.</p></div>
+          <div class="panel"><h3 style="margin:0 0 8px">The solution</h3><p style="margin:0;color:rgba(174,182,191,.95)">CCC turns tracking into weekly intelligence — patterns, triggers, trends, and next steps.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">What CCC tracks</h2>
+        <p class="section-sub">Metabolism, recovery, and performance — fast to use and easy to review.</p>
+        <div class="feature-grid">
+          <div class="panel feature"><h3>Nutrition adherence</h3><p>Targets, consistency, response patterns.</p><div class="mini">Daily • Weekly</div></div>
+          <div class="panel feature"><h3>Energy & symptoms</h3><p>How you feel, and what predicts it.</p><div class="mini">Daily • Weekly</div></div>
+          <div class="panel feature"><h3>Sleep & recovery</h3><p>Quality, duration, readiness.</p><div class="mini">Daily • Weekly</div></div>
+          <div class="panel feature"><h3>Hydration & electrolytes</h3><p>Balance for performance and stability.</p><div class="mini">Daily • Weekly</div></div>
+          <div class="panel feature"><h3>Caffeine impact</h3><p>Timing vs. sleep and output.</p><div class="mini">Daily • Weekly</div></div>
+          <div class="panel feature"><h3>Training & body comp</h3><p>Progressive overload + physique metrics.</p><div class="mini">Weekly • Monthly</div></div>
+        </div>
+      </section>
+
+      <section id="family">
+        <h2 class="section-title">Family Mode</h2>
+        <p class="section-sub">Multi-profile tracking and shared pattern detection inside one household account.</p>
+        <div class="panel">
+          <b style="display:block;margin-bottom:6px">Profiles</b>
+          <div class="profiles">
+            <div class="profile active">Wayne • Performance</div>
+            <div class="profile">Son • Muscle Gain</div>
+            <div class="profile">Wife • Health & Tone</div>
+          </div>
+          <div class="two" style="margin-top:14px">
+            <div class="card"><div class="k">Compare trends</div><div style="margin-top:6px">See what improves energy, sleep, and adherence across profiles.</div></div>
+            <div class="card"><div class="k">Shared triggers</div><div style="margin-top:6px">Identify environment factors affecting the whole household.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how">
+        <h2 class="section-title">How it works</h2>
+        <p class="section-sub">Simple daily tracking becomes powerful weekly intelligence.</p>
+        <div class="steps">
+          <div class="panel step"><b>1) Log in seconds</b><p>Fast inputs for nutrition, sleep, symptoms, hydration, and training.</p></div>
+          <div class="panel step"><b>2) Patterns detected</b><p>CCC connects inputs to outcomes.</p></div>
+          <div class="panel step"><b>3) Weekly report</b><p>Trend summaries, triggers, and what to change next.</p></div>
+          <div class="panel step"><b>4) Adjust</b><p>Iterate like a system — not a guess.</p></div>
+        </div>
+      </section>
+
+      <section id="roadmap">
+        <h2 class="section-title">Roadmap</h2>
+        <p class="section-sub">Start web, then mobile, then deep intelligence.</p>
+        <div class="timeline">
+          <div class="panel"><b>v1</b><div class="mini">Waitlist + web dashboard</div></div>
+          <div class="panel"><b>v1.5</b><div class="mini">Family profiles + weekly reports</div></div>
+          <div class="panel"><b>v2</b><div class="mini">Mobile app + insights engine</div></div>
+          <div class="panel"><b>v3</b><div class="mini">Integrations + adaptive recommendations</div></div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">FAQ</h2>
+        <p class="section-sub">Quick answers.</p>
+        <div style="display:grid;gap:12px">
+          <details><summary>Is this only for carnivore?</summary><p>No. CCC supports carnivore, keto, metabolic-focused plans, and performance households — carnivore is one optimized pathway.</p></details>
+          <details><summary>Can my family have separate goals?</summary><p>Yes. Each profile can run its own goal stack inside one household account.</p></details>
+          <details><summary>Do I need a wearable?</summary><p>No. Works without wearables. Integrations come later.</p></details>
+          <details><summary>When is beta?</summary><p>We’re onboarding in waves. Join the waitlist and you’ll be notified.</p></details>
+        </div>
+      </section>
+
+      <section id="join">
+        <div class="cta">
+          <h2 class="section-title" style="margin-top:0">Join early access</h2>
+          <p class="section-sub" style="margin-bottom:16px">Be first to experience the Family Metabolic Intelligence System.</p>
+          <div class="kit-embed">
+            <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+<form action="https://app.kit.com/forms/9117546/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="9117546" data-uid="bfb8567a55" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Success! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800">
+<div class="formkit-container" data-style="full" style="background-color: rgb(255, 255, 255);">
+  <div class="formkit-hero">
+    <div class="formkit-hero-bg-color" style="background-color: rgb(16, 16, 16);"></div>
+    <div class="formkit-hero-bg-img" style="background-color: rgb(16, 16, 16); opacity: 0.3;"></div>
+    <div class="formkit-header" data-element="header" style="color: rgb(255, 255, 255); font-size: 25px; font-weight: 700;"><p>Early Access — Carnivore Command Center</p></div>
+    <div class="formkit-content" data-element="content" style="color: rgb(255, 255, 255); font-size: 18px; font-weight: 400;"><p>Join the beta and be first to access the data-driven metabolic health platform.</p></div>
+  </div>
+  <div>
+    <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+    <div data-element="fields" data-stacked="false" class="seva-fields formkit-fields">
+      <div class="formkit-field">
+        <input class="formkit-input" name="email_address" aria-label="Email Address" placeholder="Email Address" required="" type="email" style="color: rgb(146, 146, 146); border-color: rgb(228, 231, 234); border-radius: 0px; font-weight: 400;">
+      </div>
+      <button data-element="submit" class="formkit-submit formkit-submit" style="color: rgb(255, 255, 255); background-color: rgb(199, 92, 86); border-radius: 0px; font-weight: 700;">
+        <div class="formkit-spinner"><div></div><div></div><div></div></div>
+        <span class="">Join Early Access</span>
+      </button>
+    </div>
+    <div class="formkit-powered-by-convertkit-container">
+      <a href="https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic" data-element="powered-by" class="formkit-powered-by-convertkit" data-variant="dark" target="_blank" rel="nofollow">Built with Kit</a>
+    </div>
+  </div>
+</div>
+</form>
+          </div>
+          <div class="mini" style="margin-top:10px">No spam. Unsubscribe anytime.</div>
+        </div>
+      </section>
+
+      <footer>
+        <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center">
+          <div>© <span id="y"></span> Carnivore Command Center™ — A product of WDC LLC.</div>
+          <div style="display:flex;gap:14px">
+            <a href="mailto:info@wdc-llc.com">Contact</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
