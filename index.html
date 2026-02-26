@@ -346,6 +346,125 @@
       .pill{align-self:flex-start;}
       .hero{padding-top: 10px;}
     }
+    <style>
+/* ==========================
+   CCC Dark Mode for Kit Form
+   Targets your specific form UID: bfb8567a55
+   ========================== */
+
+.formkit-form[data-uid="bfb8567a55"]{
+  max-width: 100% !important;
+}
+
+/* Outer container (Kit sets this to white inline) */
+.formkit-form[data-uid="bfb8567a55"] .formkit-container{
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
+  padding: 18px !important;
+}
+
+/* Hero area */
+.formkit-form[data-uid="bfb8567a55"] .formkit-hero{
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  margin-bottom: 16px !important;
+}
+
+/* Darken/soften the image overlay */
+.formkit-form[data-uid="bfb8567a55"] .formkit-hero-bg-color{
+  background-color: rgba(8,12,24,.92) !important;
+}
+.formkit-form[data-uid="bfb8567a55"] .formkit-hero-bg-img{
+  opacity: 0.18 !important;
+  filter: saturate(0.7) contrast(1.05) !important;
+}
+
+/* Header text + content text */
+.formkit-form[data-uid="bfb8567a55"] .formkit-header,
+.formkit-form[data-uid="bfb8567a55"] .formkit-content{
+  color: rgba(244,247,255,.95) !important;
+}
+
+/* Fields layout container */
+.formkit-form[data-uid="bfb8567a55"] .formkit-fields{
+  gap: 10px !important;
+}
+
+/* Input styling */
+.formkit-form[data-uid="bfb8567a55"] .formkit-input{
+  background: rgba(6,10,22,.75) !important;
+  color: rgba(244,247,255,.95) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 14px !important;
+  padding: 14px 14px !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.12) !important;
+}
+
+.formkit-form[data-uid="bfb8567a55"] .formkit-input::placeholder{
+  color: rgba(225,236,255,.55) !important;
+}
+
+.formkit-form[data-uid="bfb8567a55"] .formkit-input:focus{
+  outline: none !important;
+  border-color: rgba(42,169,255,.65) !important;
+  box-shadow:
+    0 0 0 3px rgba(42,169,255,.18),
+    inset 0 0 0 1px rgba(0,0,0,.12) !important;
+}
+
+/* Button styling (Kit makes it flat/red by inline styles) */
+.formkit-form[data-uid="bfb8567a55"] .formkit-submit{
+  border-radius: 14px !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  background: linear-gradient(135deg, rgba(42,169,255,1), rgba(111,224,255,.85)) !important;
+  color: #08111f !important;
+  font-weight: 900 !important;
+  letter-spacing: .01em !important;
+  box-shadow: 0 14px 34px rgba(42,169,255,.18) !important;
+}
+
+.formkit-form[data-uid="bfb8567a55"] .formkit-submit > span{
+  padding: 14px 22px !important;
+}
+
+.formkit-form[data-uid="bfb8567a55"] .formkit-submit:hover{
+  filter: brightness(1.05) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* If Kit tries to “connect” the input+button by removing radii */
+.formkit-form[data-uid="bfb8567a55"] .formkit-fields[data-stacked="false"] .formkit-field input{
+  border-right: 1px solid rgba(255,255,255,.16) !important;
+  border-top-right-radius: 14px !important;
+  border-bottom-right-radius: 14px !important;
+}
+.formkit-form[data-uid="bfb8567a55"] .formkit-fields[data-stacked="false"] .formkit-submit{
+  border-top-left-radius: 14px !important;
+  border-bottom-left-radius: 14px !important;
+}
+
+/* Success / error messages */
+.formkit-form[data-uid="bfb8567a55"] .formkit-alert-success{
+  background: rgba(16,191,122,.14) !important;
+  border-color: rgba(16,191,122,.35) !important;
+  color: rgba(214,255,238,.95) !important;
+}
+.formkit-form[data-uid="bfb8567a55"] .formkit-alert-error{
+  background: rgba(242,100,59,.12) !important;
+  border-color: rgba(242,100,59,.35) !important;
+  color: rgba(255,221,212,.95) !important;
+}
+
+/* "Built with Kit" — make subtle */
+.formkit-form[data-uid="bfb8567a55"] .formkit-powered-by-convertkit-container{
+  opacity: .55 !important;
+}
+.formkit-form[data-uid="bfb8567a55"] .formkit-powered-by-convertkit{
+  filter: grayscale(1) contrast(1.1) !important;
+}
+</style>
   </style>
 </head>
 
