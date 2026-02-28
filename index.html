@@ -4,200 +4,280 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Carnivore Command Center</title>
-  <meta name="description" content="Elite performance + metabolic intelligence. Track what matters, find patterns, and execute with confidence." />
+  <meta name="description" content="Elite performance + metabolic intelligence. Track what matters, see patterns, and execute with confidence." />
   <meta name="theme-color" content="#0b1020" />
 
-  <!-- Social preview -->
   <meta property="og:title" content="Carnivore Command Center" />
-  <meta property="og:description" content="Elite performance + metabolic intelligence. Track what matters, find patterns, and execute with confidence." />
+  <meta property="og:description" content="Elite performance + metabolic intelligence. Track what matters, see patterns, and execute with confidence." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="/assets/img/ccc_logo_primary_transparent.png" />
 
-  <link rel="icon" href="/assets/favicon/favicon.ico" />
+  <!-- Your CSS path -->
   <link rel="stylesheet" href="/css/styles.css" />
 </head>
 
 <body>
-  <!-- Top Nav -->
-  <header class="nav">
-    <div class="container nav__inner">
+  <!-- Top gradient + soft background -->
+  <div class="bg"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
       <a class="brand" href="/">
-        <img class="brand__logo" src="/assets/img/ccc_logo_primary_transparent.png" alt="Carnivore Command Center logo">
-        <div class="brand__text">
-          <div class="brand__name">Carnivore Command Center</div>
-          <div class="brand__tag">Elite Performance Intelligence</div>
+        <!-- Update filename if needed -->
+        <img src="/img/ccc_logo_primary_transparent.png" alt="Carnivore Command Center logo" class="brand-logo" />
+        <div class="brand-text">
+          <div class="brand-title">Carnivore Command Center</div>
+          <div class="brand-subtitle">Elite performance + metabolic intelligence</div>
         </div>
       </a>
 
-      <nav class="nav__links">
+      <nav class="nav">
+        <a href="#product">Product</a>
+        <a href="#how">How it works</a>
+        <a href="#beta">Beta</a>
+        <a href="/investor/">Investor</a>
         <a href="/about/">About</a>
-        <a href="/beta/" class="btn btn--sm btn--primary">Join Beta</a>
       </nav>
+
+      <div class="header-cta">
+        <a class="btn btn-ghost" href="#beta">Join</a>
+      </div>
     </div>
   </header>
 
-  <!-- Hero -->
   <main>
+    <!-- HERO -->
     <section class="hero">
-      <div class="container hero__grid">
-        <div class="hero__copy">
+      <div class="container hero-inner">
+        <div class="hero-left">
           <div class="badge">Early Access • Building now</div>
-          <h1>Metabolic intelligence for high-discipline people.</h1>
+          <h1>Metabolic clarity.<br/>Performance intelligence.</h1>
           <p class="lead">
-            Carnivore Command Center turns scattered tracking into clear decisions:
-            inputs → outcomes → patterns → next actions.
+            CCC helps you track the variables that actually move energy, symptoms, and performance — then turns patterns
+            into decisions you can act on.
           </p>
 
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="/beta/">Get Beta Access</a>
-            <a class="btn btn--ghost" href="#how">See how it works</a>
+          <div class="hero-points">
+            <div class="point">Decision-focused tracking (not vanity metrics)</div>
+            <div class="point">Pattern recognition across days, weeks, cycles</div>
+            <div class="point">Family profiles + experiment-friendly workflows</div>
           </div>
 
-          <div class="trust">
-            <div class="trust__item">
-              <div class="trust__title">Built for:</div>
-              <div class="trust__text">Optimizers • Parents • Performance-focused professionals</div>
-            </div>
-            <div class="trust__item">
-              <div class="trust__title">Focus:</div>
-              <div class="trust__text">Patterns, adherence, sleep, electrolytes, symptoms, performance</div>
-            </div>
+          <div class="hero-mini">
+            <span class="dot"></span> Private beta invites go out in waves.
           </div>
         </div>
 
-        <div class="hero__panel">
+        <!-- FORM CARD -->
+        <div class="hero-right" id="beta">
+          <div class="card card-glow">
+            <div class="card-head">
+              <div class="card-title">Join Early Access</div>
+              <div class="card-sub">Get beta invites + build updates.</div>
+            </div>
+
+            <!-- ===========================
+                 PASTE YOUR KIT EMBED HERE
+                 Put the <script ...></script> and <form ...>...</form>
+                 exactly as Kit provides.
+                 =========================== -->
+
+            <!-- KIT EMBED START -->
+            <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+            <form action="https://app.kit.com/forms/9117546/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="9117546" data-uid="bfb8567a55" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Success! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;}}}" min-width="400 500 600 700 800">
+              <!-- NOTE: You can keep your full embed exactly as-is.
+                   If your embed is extremely long, paste the full thing here. -->
+            </form>
+            <!-- KIT EMBED END -->
+
+            <div class="fineprint">
+              No spam. Unsubscribe anytime. If you don’t see confirmation, check Promotions/Junk.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PRODUCT -->
+    <section class="section" id="product">
+      <div class="container">
+        <div class="section-head">
+          <h2>Stop guessing. Start measuring.</h2>
+          <p>
+            Most health tracking collects data without producing understanding. CCC is built to connect inputs → outcomes
+            and surface what to do next.
+          </p>
+        </div>
+
+        <div class="grid-3">
           <div class="panel">
-            <div class="panel__top">
-              <div class="panel__title">What you’ll get in beta</div>
-              <div class="panel__subtitle">A system — not another tracker</div>
-            </div>
+            <div class="panel-title">Signals that matter</div>
+            <p>Energy, symptoms, sleep, performance — and the behaviors that drive them.</p>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Patterns over time</div>
+            <p>Trends across days/weeks/cycles instead of single-day noise.</p>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Decisions, not dashboards</div>
+            <p>Clear interpretations so you know what to change next.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <ul class="checklist">
-              <li><span class="check"></span>Daily tracking that’s actually usable</li>
-              <li><span class="check"></span>Weekly “pattern review” summary</li>
-              <li><span class="check"></span>Family profiles under one account</li>
-              <li><span class="check"></span>Insight prompts that lead to decisions</li>
-              <li><span class="check"></span>Early adopter pricing + influence</li>
+    <!-- SECTION: HOW -->
+    <section class="section section-alt" id="how">
+      <div class="container">
+        <div class="section-head">
+          <h2>How it works</h2>
+          <p>A simple loop: track → observe → adjust → repeat.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Capture daily inputs</div>
+              <p>Nutrition adherence, electrolytes, hydration, caffeine, training, sleep.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Log outcomes</div>
+              <p>Energy, mood, cravings, digestion, inflammation, performance markers.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">See patterns & execute</div>
+              <p>Identify triggers and winning routines — then run smarter experiments.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title">Family mode is built-in</div>
+          <p>Multiple profiles so you can track yourself and your family under one system.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: BETA -->
+    <section class="section" id="beta-info">
+      <div class="container">
+        <div class="section-head">
+          <h2>Beta program</h2>
+          <p>Limited seats so feedback stays high quality and the system stays stable.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <div class="panel-title">What you get</div>
+            <ul class="bullets">
+              <li>Early access in invite waves</li>
+              <li>Direct influence on features</li>
+              <li>Founder updates + roadmap visibility</li>
+              <li>Early adopter pricing advantages</li>
             </ul>
+          </div>
 
-            <div class="panel__cta">
-              <a class="btn btn--primary btn--block" href="/beta/">Join Early Access</a>
-              <div class="micro">No spam. Confirmations may land in Promotions/Spam depending on security filters.</div>
-            </div>
+          <div class="panel">
+            <div class="panel-title">What we need from you</div>
+            <ul class="bullets">
+              <li>Use it consistently for 2–4 weeks</li>
+              <li>Give honest feedback on what’s confusing</li>
+              <li>Tell us what signals you want surfaced</li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <div class="hero__glow" aria-hidden="true"></div>
-    </section>
-
-    <!-- How it works -->
-    <section id="how" class="section section--alt">
-      <div class="container">
-        <div class="section__head">
-          <h2>How CCC works</h2>
-          <p>Simple inputs. Clear outputs. Decisions you can execute.</p>
-        </div>
-
-        <div class="cards cards--3">
-          <article class="card">
-            <div class="card__kicker">01</div>
-            <h3>Track what matters</h3>
-            <p>Adherence, symptoms, energy, sleep, hydration, electrolytes, caffeine strategy, and performance markers.</p>
-          </article>
-
-          <article class="card">
-            <div class="card__kicker">02</div>
-            <h3>Detect patterns</h3>
-            <p>CCC focuses on trendlines across days/weeks—not random single-day snapshots.</p>
-          </article>
-
-          <article class="card">
-            <div class="card__kicker">03</div>
-            <h3>Decide faster</h3>
-            <p>Insight prompts help you change the right variable next—so you stop guessing and start iterating.</p>
-          </article>
+        <div class="center-cta">
+          <a class="btn" href="#beta">Join Early Access</a>
+          <a class="btn btn-ghost" href="/investor/">Investor Info</a>
         </div>
       </div>
     </section>
 
-    <!-- Feature blocks -->
-    <section class="section">
+    <!-- SECTION: INVESTOR (homepage section + page link) -->
+    <section class="section section-alt" id="investor">
       <div class="container">
-        <div class="split">
-          <div>
-            <h2>Designed for clarity, not noise.</h2>
-            <p class="muted">
-              Most tracking fails because it creates data without understanding.
-              CCC is built to interpret reality—so you can run better experiments and improve consistently.
+        <div class="section-head">
+          <h2>Investor</h2>
+          <p>We’re building a new category: metabolic intelligence for elite performance and family outcomes.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <div class="panel-title">The thesis</div>
+            <p>
+              CCC is not “another tracker.” It’s a decision system that connects behavior to outcomes and creates clarity
+              people can act on — at scale.
             </p>
-
-            <div class="pillrow">
-              <span class="pill">Decision-focused</span>
-              <span class="pill">Pattern recognition</span>
-              <span class="pill">Human-readable</span>
-              <span class="pill">Family mode</span>
-            </div>
-
-            <div style="margin-top:16px">
-              <a class="btn btn--primary" href="/beta/">Join the Beta</a>
-            </div>
           </div>
-
-          <div class="stack">
-            <div class="mini">
-              <div class="mini__title">Use cases</div>
-              <ul class="bullets">
-                <li>“Why did my energy crash this week?”</li>
-                <li>“Which variable triggers symptoms?”</li>
-                <li>“What changes actually move the trendline?”</li>
-                <li>“How do sleep + electrolytes interact?”</li>
-              </ul>
-            </div>
-
-            <div class="mini mini--bright">
-              <div class="mini__title">What CCC is NOT</div>
-              <ul class="bullets">
-                <li>Passive “just collect metrics” tracking</li>
-                <li>Trendy quick fixes</li>
-                <li>Surface-level wellness content</li>
-              </ul>
-            </div>
+          <div class="panel">
+            <div class="panel-title">Deck + contact</div>
+            <p>
+              If you’re evaluating early-stage opportunities, we can share the deck and roadmap on request.
+            </p>
+            <div class="spacer"></div>
+            <a class="btn" href="/investor/">Open Investor Page</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta">
-      <div class="container cta__inner">
-        <div>
-          <h2>Be early. Help shape the system.</h2>
-          <p class="muted">Beta invites go out in waves. The most engaged subscribers get priority access.</p>
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <h2>FAQ</h2>
         </div>
-        <div class="cta__actions">
-          <a class="btn btn--primary" href="/beta/">Get Beta Access</a>
-          <a class="btn btn--ghost" href="/about/">Learn more</a>
+
+        <div class="faq">
+          <details class="faq-item">
+            <summary>Is this only for carnivore?</summary>
+            <p>No. CCC supports elimination-style nutrition and metabolic clarity, but it’s built for pattern detection and performance decisions regardless of approach.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>When does beta start?</summary>
+            <p>Invites roll out in waves. Join the waitlist and you’ll get updates as soon as your wave opens.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Will there be a mobile app?</summary>
+            <p>Yes — mobile-friendly experience is a priority. Early access helps us validate what matters most first.</p>
+          </details>
         </div>
       </div>
     </section>
+
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__left">
-        <div class="footer__brand">Carnivore Command Center</div>
-        <div class="footer__muted">Elite performance + metabolic intelligence.</div>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="footer-brand">Carnivore Command Center</div>
+        <div class="footer-sub">Elite performance + metabolic intelligence</div>
       </div>
-      <div class="footer__links">
+
+      <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/investor/">Investor</a>
         <a href="/privacy/">Privacy</a>
         <a href="/terms/">Terms</a>
-        <a href="/beta/">Beta</a>
       </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>© <span id="year"></span> Carnivore Command Center. All rights reserved.</div>
     </div>
   </footer>
 
-  <script src="/js/main.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
