@@ -4,57 +4,155 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About — Carnivore Command Center</title>
-  <meta name="description" content="About Carnivore Command Center." />
-  <meta name="theme-color" content="#070b14" />
-  <style>
-    :root{--bg:#070b14;--text:#f4f7ff;--muted:rgba(225,236,255,.78);--line:rgba(255,255,255,.14);--panel:rgba(255,255,255,.085);--shadow:0 18px 70px rgba(0,0,0,.55);--r:20px;--max:980px;}
-    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);
-      background:radial-gradient(1200px 700px at 22% -10%, rgba(42,169,255,.22), transparent 60%),
-      radial-gradient(900px 650px at 75% 10%, rgba(111,224,255,.14), transparent 58%),
-      linear-gradient(180deg,#070b14 0%, #050711 55%, #060917 100%);}
-    .wrap{width:min(var(--max),92vw);margin:0 auto;padding:34px 0 60px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-    .brand img{width:44px;height:44px;object-fit:contain}
-    .brand strong{letter-spacing:.12em;text-transform:uppercase;font-size:13px}
-    .brand span{display:block;color:var(--muted);font-size:12px;margin-top:4px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:26px}
-    h1{margin:0 0 10px;font-size:clamp(28px,3.6vw,44px)}
-    p{margin:0 0 12px;color:var(--muted);line-height:1.65}
-    .links{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
-    .links a{color:var(--text);text-decoration:none;border:1px solid var(--line);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.04)}
-  </style>
+  <meta name="description" content="Carnivore Command Center is a decision-focused performance + metabolic intelligence platform." />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
+
 <body>
-  <div class="wrap">
-    <header>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav__inner">
       <a class="brand" href="/">
-        <img src="/assets/ccc_logo_primary_transparent.png" alt="CCC logo">
+        <img class="brand__logo" src="/assets/img/ccc_logo_primary_transparent.png" alt="Carnivore Command Center logo" />
         <div>
-          <strong>Carnivore</strong>
-          <span>Command Center</span>
+          <div class="brand__name">Carnivore Command Center</div>
+          <div class="brand__tag">Elite performance + metabolic intelligence</div>
         </div>
       </a>
-      <div class="links">
+
+      <nav class="nav__links">
+        <a href="/#product">Product</a>
+        <a href="/#how">How it works</a>
+        <a href="/#beta">Beta</a>
+        <a href="/investor/">Investor</a>
+        <a href="/about/">About</a>
+      </nav>
+
+      <a class="btn btn--sm btn--ghost" href="/#beta">Join</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="section">
+      <div class="container narrow">
+        <div class="badge">About CCC</div>
+        <h1 style="margin:14px 0 10px; font-size: clamp(34px, 4vw, 52px); letter-spacing:-0.03em; line-height:1.05;">
+          Built to create clarity — not noise.
+        </h1>
+        <p class="lead">
+          Most tools collect data. Carnivore Command Center is being built to translate signals into decisions
+          you can act on — consistently, over time.
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="cards cards--2">
+          <div class="card">
+            <div class="card__kicker">01</div>
+            <h3>Decision-first design</h3>
+            <p>
+              If a metric doesn’t help you decide what to change next, it doesn’t belong.
+              CCC is built around action, not dashboards.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card__kicker">02</div>
+            <h3>Patterns over single moments</h3>
+            <p>
+              Your body responds to accumulated inputs. CCC focuses on trends across days, weeks, and cycles
+              so you can see what’s actually happening.
+            </p>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <section class="section" style="padding: 0;">
+          <div class="split">
+            <div class="card">
+              <h3>What we’re building</h3>
+              <p class="muted" style="line-height:1.7;">
+                A metabolic intelligence platform for elite performance and high-discipline individuals —
+                designed to connect behaviors → outcomes and surface cause-and-effect patterns.
+              </p>
+
+              <div class="pillrow">
+                <div class="pill">Inputs → Outcomes</div>
+                <div class="pill">Pattern detection</div>
+                <div class="pill">Experiment workflows</div>
+                <div class="pill">Family profiles</div>
+              </div>
+            </div>
+
+            <div class="stack">
+              <div class="mini mini--bright">
+                <div class="mini__title">Beta is the build phase</div>
+                <ul class="bullets">
+                  <li>Limited seats for high-quality feedback</li>
+                  <li>Feature influence for early users</li>
+                  <li>Direct communication from the build team</li>
+                </ul>
+                <div style="margin-top:12px;">
+                  <a class="btn btn--primary btn--block" href="/#beta">Join Early Access</a>
+                </div>
+              </div>
+
+              <div class="mini">
+                <div class="mini__title">Not medical advice</div>
+                <p class="micro">
+                  CCC provides educational information and tracking tools only. It is not medical advice.
+                  Always consult a qualified health professional for medical decisions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="container narrow">
+        <div class="cta__inner">
+          <div>
+            <div style="font-weight:900; font-size:18px;">Get beta invites + build updates</div>
+            <div class="micro">Join early access and you’ll be notified when your invitation wave opens.</div>
+          </div>
+          <div class="cta__actions">
+            <a class="btn btn--primary" href="/#beta">Join Early Access</a>
+            <a class="btn btn--ghost" href="/investor/">Investor Info</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="footer__brand">Carnivore Command Center</div>
+        <div class="footer__muted">Elite performance + metabolic intelligence</div>
+      </div>
+      <div class="footer__links">
+        <a href="/about/">About</a>
+        <a href="/investor/">Investor</a>
         <a href="/privacy/">Privacy</a>
         <a href="/terms/">Terms</a>
       </div>
-    </header>
-
-    <div class="card">
-      <h1>About</h1>
-      <p>
-        Carnivore Command Center (CCC) is being built as an elite performance + metabolic intelligence system:
-        track what matters, see patterns over time, and make decisions with confidence.
-      </p>
-      <p>
-        We’re starting with structured tracking and insight loops — then expanding into deeper pattern recognition,
-        experimentation workflows, and family profiles.
-      </p>
-      <p>
-        If you’re here early, you’re part of the build phase.
-      </p>
     </div>
-  </div>
+
+    <div class="container" style="margin-top:16px;">
+      <div class="micro">© <span id="year"></span> Carnivore Command Center. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
