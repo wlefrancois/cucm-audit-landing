@@ -93,8 +93,23 @@ function buildPage(pagePath) {
     if (fs.existsSync(p)) copyDir(p, path.join(DIST_DIR, folder));
   }
 
-  const pages = walkHtml(SRC_DIR);
-  pages.forEach(buildPage);
+ if (!fs.existsSync(SRC_DIR)) {
+  console.error(
+    `Build failed: missing /src directory at ${SRC_DIR}. ` +
+    `Create /src and add at least /src/index.html (content-only).`
+  );
+  process.exit(1);
+}
 
-  console.log(`Built ${pages.length} pages to /dist`);
+const pages = walkHtml(SRC_DIR);
+
+if (pages.length === 0) {
+  console.error(
+    "Build failed: /src contains no .html files. Add at least /src/index.html."
+  );
+  process.exit(1);
+}
+
+pages.forEach(buildPage);
+console.log(`Built ${pages.length} pages to /dist`);
 })();
