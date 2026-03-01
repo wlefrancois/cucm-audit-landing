@@ -491,3 +491,23 @@ a:hover{opacity:.92}
   border: 1px solid rgba(255,255,255,.14) !important;
   background: linear-gradient(180deg, rgba(42,169,255,.95), rgba(42,169,255,.78)) !important;
 }
+/* Header link row styling */
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.nav-links a{
+  font-size:14px;
+  color: rgba(230,238,255,.88);
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+}
+
+.nav-links a:hover{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.22);
+}
