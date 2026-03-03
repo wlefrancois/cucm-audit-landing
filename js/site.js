@@ -3,7 +3,24 @@
   // Active nav link highlighting
   const path = window.location.pathname.replace(/\/$/, "") || "/";
   const navLinks = document.querySelectorAll(".nav-links a");
+  // Mobile nav toggle
+  const toggle = document.querySelector(".nav__toggle");
+  const nav = document.querySelector(".nav-links[data-nav]");
 
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const open = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    // Close menu after clicking a link (mobile UX)
+    nav.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
   navLinks.forEach((a) => {
     const href = a.getAttribute("href");
     if (!href) return;
