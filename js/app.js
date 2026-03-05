@@ -12,7 +12,14 @@ export async function getUser() {
 }
 
 export async function signUp(email, password) {
-  return supabase.auth.signUp({ email, password });
+  return supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: "https://carnivorecommandcenter.com/app/"
+    }
+  });
+}
 }
 
 export async function signIn(email, password) {
