@@ -128,11 +128,10 @@ function escapeHtml(s) {
     .replaceAll("'", "&#039;");
 }
 
-function buildLineChart(canvasId, label, labels, values) {
+function buildLineChart(canvasId, label, labels, values, yMin = null, yMax = null) {
   const el = document.getElementById(canvasId);
   if (!el) return;
 
-  // Destroy existing chart if hot reload / back button
   if (el._chart) el._chart.destroy();
 
   el._chart = new Chart(el, {
@@ -143,8 +142,10 @@ function buildLineChart(canvasId, label, labels, values) {
         {
           label,
           data: values,
-          tension: 0.3,
-          spanGaps: true
+          tension: 0.35,
+          spanGaps: true,
+          pointRadius: 4,
+          pointHoverRadius: 6
         }
       ]
     },
@@ -154,14 +155,16 @@ function buildLineChart(canvasId, label, labels, values) {
         legend: { display: false }
       },
       scales: {
-        x: {
-          ticks: { maxRotation: 0 }
+        x: { ticks: { maxRotation: 0 } },
+        y: {
+          beginAtZero: false,
+          suggestedMin: yMin ?? undefined,
+          suggestedMax: yMax ?? undefined
         }
       }
     }
   });
 }
-
 async function load() {
   const user = await getUser();
   if (!user) {
