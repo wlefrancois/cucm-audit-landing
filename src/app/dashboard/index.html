@@ -254,25 +254,28 @@ async function load() {
   const labels = asc.map((r) => r.log_date.slice(5)); // MM-DD
 
   buildLineChart(
-    "chartEnergy",
-    "Energy",
-    labels,
-    asc.map((r) => (r.energy == null ? null : Number(r.energy)))
-  );
+  "chartEnergy",
+  "Energy",
+  labels,
+  asc.map(r => (r.energy == null ? null : Number(r.energy))),
+  1, 10
+);
 
-  buildLineChart(
-    "chartSleep",
-    "Sleep Hours",
-    labels,
-    asc.map((r) => (r.sleep_hours == null ? null : Number(r.sleep_hours)))
-  );
+buildLineChart(
+  "chartSleep",
+  "Sleep Hours",
+  labels,
+  asc.map(r => (r.sleep_hours == null ? null : Number(r.sleep_hours))),
+  0, 10
+);
 
-  buildLineChart(
-    "chartInflam",
-    "Inflammation",
-    labels,
-    asc.map((r) => (r.inflammation == null ? null : Number(r.inflammation)))
-  );
+buildLineChart(
+  "chartInflam",
+  "Inflammation",
+  labels,
+  asc.map(r => (r.inflammation == null ? null : Number(r.inflammation))),
+  1, 10
+);
 
   // Log list
   logsEl.innerHTML = rows
