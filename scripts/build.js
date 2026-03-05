@@ -87,12 +87,17 @@ function buildPage(pagePath) {
 (function main() {
   emptyDir(DIST_DIR);
 
-  // Copy shared static folders from repo root into dist
-  for (const folder of ["css", "assets", "js"]) {
-    const p = path.join(ROOT, folder);
-    if (fs.existsSync(p)) copyDir(p, path.join(DIST_DIR, folder));
-  }
+ // Copy shared static folders from repo root into dist
+for (const folder of ["css", "assets", "js"]) {
+  const p = path.join(ROOT, folder);
+  if (fs.existsSync(p)) copyDir(p, path.join(DIST_DIR, folder));
+}
 
+// Copy favicon if present
+const favicon = path.join(ROOT, "favicon.ico");
+if (fs.existsSync(favicon)) {
+  fs.copyFileSync(favicon, path.join(DIST_DIR, "favicon.ico"));
+}
  if (!fs.existsSync(SRC_DIR)) {
   console.error(
     `Build failed: missing /src directory at ${SRC_DIR}. ` +
