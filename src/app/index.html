@@ -1,29 +1,142 @@
+<section class="page-hero">
+  <div class="container">
+    <h1>Carnivore Command Center</h1>
+    <p class="lead">Login or create your CCC account.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="card" style="max-width:480px; margin:auto;">
+
+      <h3>Account Access</h3>
+
+      <div class="divider" style="margin:14px 0;"></div>
+
+      <!-- EMAIL -->
+      <label class="micro muted">Email</label>
+      <input
+        id="email"
+        type="email"
+        placeholder="you@email.com"
+        style="width:100%; padding:12px; margin-top:6px; margin-bottom:12px;"
+      />
+
+      <!-- PASSWORD -->
+      <label class="micro muted">Password</label>
+      <input
+        id="password"
+        type="password"
+        placeholder="Enter password"
+        style="width:100%; padding:12px; margin-top:6px; margin-bottom:16px;"
+      />
+
+      <!-- BUTTONS -->
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn--primary" id="loginBtn" type="button">
+          Login
+        </button>
+
+        <button class="btn btn--ghost" id="signupBtn" type="button">
+          Create Account
+        </button>
+
+        <a class="btn btn--ghost" href="/">
+          Back to site
+        </a>
+      </div>
+
+      <!-- STATUS MESSAGE -->
+      <p id="authMsg" class="micro muted" style="margin-top:14px;"></p>
+
+    </div>
+
+  </div>
+</section>
+
+
 <script type="module">
-  import { signIn, signUp } from "/js/app.js";
 
-  const email = document.getElementById("email");
-  const password = document.getElementById("password");
-  const msg = document.getElementById("authMsg");
+import { signIn, signUp } from "/js/app.js";
 
-  document.getElementById("loginBtn").addEventListener("click", async () => {
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const msg = document.getElementById("authMsg");
+
+
+// LOGIN BUTTON
+const loginBtn = document.getElementById("loginBtn");
+
+if (loginBtn) {
+
+  loginBtn.addEventListener("click", async () => {
+
     try {
+
       msg.textContent = "Logging in...";
-      const { error } = await signIn(email.value.trim(), password.value);
-      if (error) msg.textContent = error.message;
-      else window.location.href = "/app/dashboard/";
+
+      const { error } = await signIn(
+        email.value.trim(),
+        password.value
+      );
+
+      if (error) {
+
+        msg.textContent = error.message;
+
+      } else {
+
+        window.location.href = "/app/dashboard/";
+
+      }
+
     } catch (e) {
+
       msg.textContent = "JS error: " + (e?.message || e);
+
     }
+
   });
 
-  document.getElementById("signupBtn").addEventListener("click", async () => {
+}
+
+
+// CREATE ACCOUNT BUTTON
+const signupBtn = document.getElementById("signupBtn");
+
+if (signupBtn) {
+
+  signupBtn.addEventListener("click", async () => {
+
     try {
+
       msg.textContent = "Creating account...";
-      const { error } = await signUp(email.value.trim(), password.value);
-      if (error) msg.textContent = error.message;
-      else msg.textContent = "Account created. Check your email (if confirmation is enabled), then login.";
+
+      const { error } = await signUp(
+        email.value.trim(),
+        password.value
+      );
+
+      if (error) {
+
+        msg.textContent = error.message;
+
+      } else {
+
+        msg.textContent =
+          "Account created. Check your email to confirm your account.";
+
+      }
+
     } catch (e) {
+
       msg.textContent = "JS error: " + (e?.message || e);
+
     }
+
   });
+
+}
+
 </script>
