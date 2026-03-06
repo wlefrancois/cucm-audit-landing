@@ -155,6 +155,45 @@ function computeScore(row) {
 }
 
 function getLimiter(parts) {
+  function getRecommendation(limiter) {
+  switch (limiter) {
+    case "sleep":
+      return {
+        title: "Today's Recommendation",
+        body: "Sleep is limiting your metabolic score. Aim for 7–8 hours tonight and reduce late-night stimulation."
+      };
+    case "energy":
+      return {
+        title: "Today's Recommendation",
+        body: "Energy is running low. Keep today simpler, reduce unnecessary stress, and support recovery."
+      };
+    case "inflammation":
+      return {
+        title: "Today's Recommendation",
+        body: "Inflammation is limiting your score. Focus on recovery, lower training intensity, and keep food choices clean and consistent."
+      };
+    case "digestion":
+      return {
+        title: "Today's Recommendation",
+        body: "Digestion is limiting your score. Keep meals simple today and avoid stacking too many variables."
+      };
+    case "mood":
+      return {
+        title: "Today's Recommendation",
+        body: "Mood is weighing on your readiness. Reduce friction today and focus on a calm, steady routine."
+      };
+    case "hydration":
+      return {
+        title: "Today's Recommendation",
+        body: "Hydration is limiting your score. Increase water intake and aim for at least 80 oz today."
+      };
+    default:
+      return {
+        title: "Today's Recommendation",
+        body: "Log consistently so CCC can generate more accurate recommendations."
+      };
+  }
+}
   const entries = [
     ["sleep", parts.sleep],
     ["energy", parts.energy],
