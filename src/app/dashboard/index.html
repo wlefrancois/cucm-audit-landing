@@ -68,6 +68,7 @@ const stats = document.getElementById("stats");
 const weeklyCard = document.getElementById("weeklyCard");
 const insights = document.getElementById("insights");
 const forecastCard = document.getElementById("forecastCard");
+const trainingCard = document.getElementById("trainingCard");
 const logsEl = document.getElementById("logs");
 
 document.getElementById("logoutBtn").addEventListener("click", async () => {
@@ -439,6 +440,41 @@ async function load() {
           </div>
         </div>
       `;
+      const training = getTrainingGuidance(todayScore.total, limiter);
+
+trainingCard.innerHTML = `
+  <div style="display:flex; gap:14px; align-items:flex-start;">
+    <div style="
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:${training.color};
+      border:1px solid ${training.border};
+      font-size:18px;
+    ">✓</div>
+
+    <div style="flex:1;">
+      <strong style="display:block; margin-bottom:6px;">
+        Training Readiness • ${training.level}
+      </strong>
+
+      <div class="micro muted" style="line-height:1.6; margin-bottom:10px;">
+        ${training.body}
+      </div>
+
+      <div style="display:grid; gap:8px;">
+        ${training.bullets.map(item => `
+          <div style="padding:8px 10px; border-radius:12px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+            ${item}
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  </div>
+`;
     } else {
       scoreCard.innerHTML = `
         <strong>No readiness score yet</strong>
@@ -467,6 +503,12 @@ async function load() {
           Log today to generate your readiness forecast.
         </div>
       `;
+      trainingCard.innerHTML = `
+  <strong>Training Readiness</strong>
+  <div class="micro muted" style="margin-top:8px;">
+    Log today to generate your training guidance.
+  </div>
+`;
     }
 
     todayCard.innerHTML = todayLog
@@ -612,6 +654,64 @@ async function load() {
     `;
   }
 }
+function getTrainingGuidance(score, limiter) {
+  if (score >= 80) {
+    return {
+      level: "High",
+      body: "Your system looks strong today. Harder training is reasonable if you feel good.",
+      bullets: [
+        "✓ Strength training",
+        "✓ Moderate cardio",
+        "✓ Higher intensity is okay",
+        "• Prioritize recovery afterward"
+      ],
+      color: "rgba(53,208,127,0.14)",
+      border: "rgba(53,208,127,0.28)"
+    };
+  }
 
+  if (score >= 60) {
+    return {
+      level: "Moderate",
+      body: `You are in a workable range today. Train, but keep an eye on ${limiter}.`,
+      bullets: [
+        "✓ Strength training",
+        "✓ Light to moderate cardio",
+        "△ Moderate intensity",
+        "✗ Avoid unnecessary max effort"
+      ],
+      color: "rgba(94,162,255,0.14)",
+      border: "rgba(94,162,255,0.28)"
+    };
+  }
+
+  if (score >= 40) {
+    return {
+      level: "Caution",
+      body: `Recovery should be the priority today. ${limiter} is limiting readiness.`,
+      bullets: [
+        "✓ Walking or mobility",
+        "✓ Easy cardio",
+        "△ Light technique work only",
+        "✗ Avoid hard training"
+      ],
+      color: "rgba(255,179,71,0.14)",
+      border: "rgba(255,179,71,0.28)"
+    };
+  }
+
+  return {
+    level: "Low",
+    body: `Your system looks strained today. Focus on recovery and stabilizing ${limiter}.`,
+    bullets: [
+      "✓ Recovery work",
+      "✓ Gentle movement",
+      "✗ Avoid heavy lifting",
+      "✗ Avoid max intensity"
+    ],
+    color: "rgba(255,107,107,0.14)",
+    border: "rgba(255,107,107,0.28)"
+  };
+}
 load();
 </script>
