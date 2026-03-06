@@ -23,15 +23,11 @@
 
 *{box-sizing:border-box}
 html,body{height:100%}
-body{
-  margin:0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  color:var(--text);
+body {
   background:
-    radial-gradient(1200px 650px at 20% -10%, rgba(42,169,255,.30), transparent 60%),
-    radial-gradient(900px 650px at 75% 5%, rgba(111,224,255,.18), transparent 58%),
-    radial-gradient(900px 900px at 60% 55%, rgba(138,92,255,.14), transparent 62%),
-    linear-gradient(180deg, var(--bg0) 0%, var(--bg2) 60%, #070b16 100%);
+    radial-gradient(1200px 600px at 20% -10%, #1b2a4a 0%, transparent 60%),
+    radial-gradient(900px 500px at 90% 0%, #182850 0%, transparent 60%),
+    linear-gradient(180deg, #070b16 0%, #0a1226 40%, #0b132b 100%);
 }
 
 a{color:inherit; text-decoration:none}
@@ -346,11 +342,8 @@ a:hover{opacity:.92}
 .section{
   padding: 54px 0;
 }
-.section--alt{
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
-  border-top: 1px solid rgba(255,255,255,.10);
-  border-bottom: 1px solid rgba(255,255,255,.10);
+.section {
+  padding: 40px 0;
 }
 .section__head{
   margin-bottom: 18px;
@@ -373,12 +366,10 @@ a:hover{opacity:.92}
 .cards--3{ grid-template-columns: repeat(3, 1fr); }
 .cards--2{ grid-template-columns: repeat(2, 1fr); }
 
-.card{
-  border: 1px solid rgba(255,255,255,.14);
-  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
-  border-radius: var(--r2);
-  box-shadow: var(--shadow2);
-  padding: 18px;
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(6px);
 }
 .card__kicker{
   width: 34px;
@@ -627,7 +618,9 @@ a:hover{opacity:.92}
   .nav__join { display: inline-flex; width: fit-content; }
 }
 .page-hero {
-  padding: 72px 0 28px;
+  background:
+    radial-gradient(800px 400px at 20% 0%, rgba(90,130,255,0.25), transparent),
+    radial-gradient(600px 400px at 80% 10%, rgba(80,180,255,0.18), transparent);
 }
 
 .page-hero h1 {
