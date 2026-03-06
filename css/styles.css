@@ -618,6 +618,20 @@ main{
   padding-bottom:96px;
 }
 
+/* READINESS TREND COLORS */
+
+.trend-up {
+  color: var(--positive);
+}
+
+.trend-down {
+  color: var(--warning);
+}
+
+.trend-flat {
+  color: var(--muted);
+}
+
 /* TREND COLORS */
 .trend-up{
   color:var(--positive);
