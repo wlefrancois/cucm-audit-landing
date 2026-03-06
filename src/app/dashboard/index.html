@@ -24,6 +24,8 @@
 
     <div id="stats" class="cards cards--3" style="margin-bottom:18px;"></div>
 
+    <div id="weeklyCard" class="card" style="margin-bottom:18px;"></div>
+
     <div id="insights" class="card" style="margin-bottom:18px;"></div>
 
     <div class="cards cards--3" style="margin-bottom:18px;">
@@ -68,6 +70,7 @@ const todayCard = document.getElementById("todayCard");
 const stats = document.getElementById("stats");
 const insights = document.getElementById("insights");
 const logsEl = document.getElementById("logs");
+const weeklyCard = document.getElementById("weeklyCard");
 
 document.getElementById("logoutBtn").addEventListener("click", async () => {
   await signOut();
@@ -418,6 +421,63 @@ async function load() {
   const sleep = rows.map((r) => r.sleep_hours == null ? null : Number(r.sleep_hours));
   const inflam = rows.map((r) => r.inflammation == null ? null : Number(r.inflammation));
   const scores = rows.map((r) => computeScore(r).total);
+
+  // WEEKLY REPORT
+if (rows.length > 0) {
+
+  const avgScore = avg(scores);
+
+  let best = rows[0];
+  rows.forEach(r => {
+    if (computeScore(r).total > computeScore(best).total) best = r;
+  });
+
+  const bestScore = computeScore(best).total;
+
+  const limiters = rows.map(r => getLimiter(computeScore(r).parts));
+
+  const limiterCounts = {};
+  limiters.forEach(l => {
+    limiterCounts[l] = (limiterCounts[l] || 0) + 1;
+  });
+
+  let mostCommonLimiter = null;
+  let maxCount = 0;
+
+  for (const key in limiterCounts) {
+    if (limiterCounts[key] > maxCount) {
+      mostCommonLimiter = key;
+      maxCount = limiterCounts[key];
+    }
+  }
+
+  weeklyCard.innerHTML = `
+    <strong>Weekly Report</strong>
+
+    <div class="cards cards--3" style="margin-top:14px;">
+
+      <div>
+        <div class="micro muted">Average Score</div>
+        <div style="font-size:28px;font-weight:700;">${avgScore}</div>
+      </div>
+
+      <div>
+        <div class="micro muted">Best Day</div>
+        <div style="font-size:18px;font-weight:600;">
+          ${best.log_date} (${bestScore})
+        </div>
+      </div>
+
+      <div>
+        <div class="micro muted">Most Common Limiter</div>
+        <div style="font-size:18px;font-weight:600;">
+          ${mostCommonLimiter || "-"}
+        </div>
+      </div>
+
+    </div>
+  `;
+}
 
   stats.innerHTML = `
     <div class="card">
