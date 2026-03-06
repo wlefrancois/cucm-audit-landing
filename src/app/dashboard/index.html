@@ -24,6 +24,7 @@
     <div id="insights" class="card" style="margin-bottom:18px;"></div>
     <div id="forecastCard" class="card" style="margin-bottom:18px;"></div>
     <div id="trainingCard" class="card" style="margin-bottom:18px;"></div>
+    <div id="recoveryCard" class="card" style="margin-bottom:18px;"></div>
     <div id="streakCard" class="card" style="margin-bottom:18px;"></div>
 
     <div class="cards cards--3" style="margin-bottom:18px;">
@@ -60,6 +61,7 @@
 import { supabase, getUser, signOut } from "/js/app.js";
 import { Chart } from "/js/vendor/chart.js";
 
+ const recoveryCard = document.getElementById("recoveryCard"); 
 const streakCard = document.getElementById("streakCard");  
 const userLine = document.getElementById("userLine");
 const scoreCard = document.getElementById("scoreCard");
@@ -350,6 +352,42 @@ async function load() {
       const limiter = getLimiter(todayScore.parts);
       const recommendation = getRecommendation(limiter);
       const { helped, hurt } = categorizeParts(todayScore.parts);
+      const priorities = getRecoveryPriorities(todayScore.parts);
+
+recoveryCard.innerHTML = `
+<strong>Recovery Priorities</strong>
+
+<div class="micro muted" style="margin:8px 0 14px;">
+Focus on these areas today to improve tomorrow’s readiness.
+</div>
+
+<div style="display:grid; gap:10px;">
+${priorities.map((p,i)=>`
+  <div style="
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 12px;
+    border-radius:12px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.10);
+  ">
+    <div style="
+      width:28px;
+      height:28px;
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(94,162,255,.18);
+      font-weight:700;
+    ">${i+1}</div>
+
+    <div>${p.name}</div>
+  </div>
+`).join("")}
+</div>
+`;
 
       let forecastText = "";
       if (limiter === "hydration") forecastText = "If hydration reaches 80–100 oz tomorrow, readiness could increase by ~4–7 points.";
@@ -771,6 +809,23 @@ function calculateStreak(rows, todayStr) {
   }
 
   return streak;
+}
+function getRecoveryPriorities(parts) {
+
+  const list = [
+    { name: "Sleep", value: parts.sleep, max: 25 },
+    { name: "Energy", value: parts.energy, max: 25 },
+    { name: "Inflammation", value: parts.inflammation, max: 20 },
+    { name: "Digestion", value: parts.digestion, max: 15 },
+    { name: "Mood", value: parts.mood, max: 10 },
+    { name: "Hydration", value: parts.water, max: 5 }
+  ];
+
+  list.forEach(x => x.score = x.value / x.max);
+
+  list.sort((a,b)=> a.score - b.score);
+
+  return list.slice(0,3);
 }
 load();
 </script>
