@@ -24,6 +24,7 @@
     <div id="insights" class="card" style="margin-bottom:18px;"></div>
     <div id="forecastCard" class="card" style="margin-bottom:18px;"></div>
     <div id="trainingCard" class="card" style="margin-bottom:18px;"></div>
+    <div id="streakCard" class="card" style="margin-bottom:18px;"></div>
 
     <div class="cards cards--3" style="margin-bottom:18px;">
       <div class="card">
@@ -59,6 +60,7 @@
 import { supabase, getUser, signOut } from "/js/app.js";
 import { Chart } from "/js/vendor/chart.js";
 
+const streakCard = document.getElementById("streakCard");  
 const userLine = document.getElementById("userLine");
 const scoreCard = document.getElementById("scoreCard");
 const actionCard = document.getElementById("actionCard");
@@ -337,6 +339,7 @@ async function load() {
     const rows = data || [];
     const today = todayISODate();
     const todayLog = rows.find((r) => r.log_date === today);
+    const streak = calculateStreak(rows, today);
 
     if (todayLog) {
       const todayScore = computeScore(todayLog);
@@ -518,6 +521,31 @@ trainingCard.innerHTML = `
          </div>`
       : `<strong>Today not logged yet</strong>
          <div class="micro muted" style="margin-top:6px;">Click “Log Today” to record your day.</div>`;
+    streakCard.innerHTML = `
+  <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+    <div style="
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(255,179,71,0.14);
+      border: 1px solid rgba(255,179,71,0.28);
+      font-size:22px;
+    ">🔥</div>
+
+    <div>
+      <strong style="display:block; margin-bottom:4px;">Consistency</strong>
+      <div style="font-size:22px; font-weight:800; line-height:1.1;">
+        ${streak} day${streak === 1 ? "" : "s"}
+      </div>
+      <div class="micro muted" style="margin-top:6px;">
+        ${streak > 0 ? "Current logging streak" : "Log today to start your streak"}
+      </div>
+    </div>
+  </div>
+`;
 
     const energy = rows.map((r) => r.energy == null ? null : Number(r.energy));
     const sleep = rows.map((r) => r.sleep_hours == null ? null : Number(r.sleep_hours));
@@ -712,6 +740,37 @@ function getTrainingGuidance(score, limiter) {
     color: "rgba(255,107,107,0.14)",
     border: "rgba(255,107,107,0.28)"
   };
+}
+function getDatePartsLocal(date = new Date()) {
+  return {
+    y: date.getFullYear(),
+    m: date.getMonth(),
+    d: date.getDate()
+  };
+}
+
+function localDateStringFromParts(y, m, d) {
+  return `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+}
+
+function shiftLocalDate(dateStr, deltaDays) {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const dt = new Date(y, m - 1, d);
+  dt.setDate(dt.getDate() + deltaDays);
+  return localDateStringFromParts(dt.getFullYear(), dt.getMonth(), dt.getDate());
+}
+
+function calculateStreak(rows, todayStr) {
+  const loggedDates = new Set(rows.map(r => r.log_date));
+  let streak = 0;
+  let cursor = todayStr;
+
+  while (loggedDates.has(cursor)) {
+    streak += 1;
+    cursor = shiftLocalDate(cursor, -1);
+  }
+
+  return streak;
 }
 load();
 </script>
